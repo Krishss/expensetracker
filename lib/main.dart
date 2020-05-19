@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:expensetracker/HomePage.dart';
 
 void main() {
-  runApp(MaterialApp(  //Creates a whole app ecosystem, All classes written below loads to material app for main
+  runApp(MaterialApp(
+    //Creates a whole app ecosystem, All classes written below loads to material app for main
     home: SplashIntro(),
   ));
 }
@@ -18,12 +19,12 @@ class _SplashIntroState extends State<SplashIntro> {
     // TODO: implement initState
     super.initState();
     Future.delayed(
-      Duration(seconds: 3),  //to set splash screen timer
-          () {
+      Duration(seconds: 3),
+      () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Home(), //set route to homepage
+            builder: (context) => MyApp(),
           ),
         );
       },
@@ -33,13 +34,10 @@ class _SplashIntroState extends State<SplashIntro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      body: Center(
-
-        child: FlutterLogo(size: 200,),
-        //child: Text("TekLucent INC."),
-
+        body: Center(
+      child: FlutterLogo(
+        size: 200,
       ),
-    );
+    ));
   }
 }
