@@ -19,7 +19,7 @@ class _SplashIntroState extends State<SplashIntro> {
     super.initState();
     Future.delayed(
       Duration(seconds: 3),  //to set splash screen timer
-      () {
+          () {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -34,12 +34,12 @@ class _SplashIntroState extends State<SplashIntro> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-        body: Center(
+      body: Center(
 
-          child: FlutterLogo(size: 200,),
-              //child: Text("TekLucent INC."),
+        child: FlutterLogo(size: 200,),
+        //child: Text("TekLucent INC."),
 
-        ),
+      ),
     );
   }
 }
