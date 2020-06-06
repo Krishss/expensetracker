@@ -24,7 +24,7 @@ class _SplashIntroState extends State<SplashIntro> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => MyApp(),
+            builder: (context) => Home(),
           ),
         );
       },

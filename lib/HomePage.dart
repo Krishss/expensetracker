@@ -1,10 +1,13 @@
+//import 'dart:html';
+
 import 'package:flutter/material.dart';
-//import 'models/global.dart';
+import 'models/global.dart';
+import './addtrip.dart';
 //import 'package:trie/trie.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(Home());
 
-class MyApp extends StatelessWidget {
+class Home extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -31,6 +34,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedTabIndex = 0;
+  int _onSaveIndex = 0;
+  var trips = ['dummy'];
 
   List _pages = [
     Text("Home"),
@@ -42,6 +47,17 @@ class _MyHomePageState extends State<MyHomePage> {
   _changeIndex(int index) {
     setState(() {
       _selectedTabIndex = index;
+    });
+
+  }
+
+  void _onSave(String tripText) {
+    setState(() {
+      _onSaveIndex+=1;
+      trips.add(tripText);
+      print(_onSaveIndex);
+      print(trips);
+      Navigator.pop(context);
     });
   }
 
@@ -77,40 +93,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
       body: ListView(
-        children: <Widget>[
-          Card( child: ListTile(
-            leading: Icon(Icons.radio_button_unchecked),
-            title: Text('Trip location A'),
-          )),
-          Card( child: ListTile(
-            leading: Icon(Icons.radio_button_unchecked),
-            title: Text('Trip location B'),
-            subtitle: Text('Bachelor Party !'),
-            trailing: Icon(Icons.more_vert),
-          ))
-        ],
-      ),
+        children: [
+          for (var i=1; i<=_onSaveIndex;i++)
+
+            Card( child: ListTile(
+              leading: Icon(Icons.radio_button_unchecked),
+              title: Text(trips[i]),
+              subtitle: Text(trips[i]),
+              trailing: Icon(Icons.more_vert),
+            ))
+        ]
+        ,)
+      ,
       //Center(child: _pages[_selectedTabIndex],),
 
       floatingActionButton: new FloatingActionButton(
-        onPressed: (){} ,//
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Addtrip(_onSave),
+            ),);
+        }, //
         backgroundColor: Colors.lime[800],
         splashColor: Colors.lime,
         //tooltip: 'Increment',
         child: new Icon(Icons.add),
-
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedTabIndex,
-        onTap: _changeIndex,
-        selectedItemColor: Colors.teal,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.radio), title: Text("Home")),
-          //BottomNavigationBarItem(icon: Icon(Icons.search), title: Text("Search")),
-          BottomNavigationBarItem(icon: Icon(Icons.trip_origin), title: Text("Trip")),
-          BottomNavigationBarItem(icon: Icon(Icons.event), title: Text("Events")),
-        ],
       ),
     );
   }
