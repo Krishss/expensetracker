@@ -12,11 +12,9 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Trackenser',
       theme: ThemeData(
-        //primarySwatch: Colors.cyan,
-          fontFamily: 'Raleway'
-      ),
+          //primarySwatch: Colors.cyan,
+          fontFamily: 'Raleway'),
       home: MyHomePage(title: 'Expense Tracker'),
     );
   }
@@ -25,7 +23,6 @@ class Home extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
-
   final String title;
 
   @override
@@ -33,27 +30,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedTabIndex = 0;
   int _onSaveIndex = 0;
   var trips = ['dummy'];
 
-  List _pages = [
-    Text("Home"),
-    //Text("Search"),
-    Text("Trip"),
-    Text("Trip Event Details"),
-  ];
-
-  _changeIndex(int index) {
-    setState(() {
-      _selectedTabIndex = index;
-    });
-
-  }
-
   void _onSave(String tripText) {
     setState(() {
-      _onSaveIndex+=1;
+      _onSaveIndex += 1;
       trips.add(tripText);
       print(_onSaveIndex);
       print(trips);
@@ -63,59 +45,106 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     //Screen UI assembly
     return Scaffold(
-      appBar: PreferredSize( //add this to actually increase size of top bar and place appbar
-        preferredSize: Size.fromHeight(120.0),
+      appBar: PreferredSize(
+        //add this to actually increase size of top bar and place appbar
 
-        child: AppBar(title: Text(widget.title, style: TextStyle(fontFamily: 'open_sans'),),
-          //titleSpacing: ,
-          centerTitle: true,
-          backgroundColor: Colors.lime[900],
-          shape: RoundedRectangleBorder( borderRadius:
-          BorderRadius.vertical(bottom: Radius.circular(30)
-          )
+        preferredSize: Size.fromHeight(100.0),
+
+        child: AppBar(
+          title: Text(
+            widget.title,
+            style: TextStyle(
+                fontFamily: 'Georgia',
+                fontSize: 30.0,
+                fontStyle: FontStyle.italic,
+                color: Colors.teal[900]),
           ),
-
+          //centerTitle: true,
+          backgroundColor: Colors.green[700],
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(10))),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.search,
+              icon: Icon(
+                Icons.search,
                 color: Colors.white,
               ),
               onPressed: () {
                 // do something`
               },
             )
-          ],),
+          ],
+        ),
       ),
       //Container(height: 100,color: Colors.cyan,)
 
-
       body: ListView(
         children: [
-          for (var i=1; i<=_onSaveIndex;i++)
-
-            Card( child: ListTile(
-              leading: Icon(Icons.radio_button_unchecked),
-              title: Text(trips[i]),
-              subtitle: Text(trips[i]),
-              trailing: Icon(Icons.more_vert),
+          for (var i = 1; i <= _onSaveIndex; i++)
+            Card(
+              elevation: 5,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0),),
+                child: ListTile(
+                  //leading: Icon(Icons.radio_button_unchecked),
+                  title: Text(trips[i]),
+                  subtitle: Text('Count'),
+                  trailing: Icon(Icons.more_vert),
             ))
-        ]
-        ,)
-      ,
-      //Center(child: _pages[_selectedTabIndex],),
+        ],
+      ),
+      // Create Side panel drawer
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.symmetric(),
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Side Notes'),
+              decoration: BoxDecoration(
+                color: Colors.teal,
+              ),
+            ),
+            ListTile(
+              title: Text('Home'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Home(),
+                  ),
+                );
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Invite Friends'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
 
       floatingActionButton: new FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Addtrip(_onSave),
-            ),);
+            MaterialPageRoute(
+              builder: (context) => Addtrip(_onSave),
+            ),
+          );
         }, //
-        backgroundColor: Colors.lime[800],
-        splashColor: Colors.lime,
+        backgroundColor: Colors.green[700],
+        splashColor: Colors.green[900],
         //tooltip: 'Increment',
         child: new Icon(Icons.add),
       ),

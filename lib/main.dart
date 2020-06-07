@@ -35,9 +35,8 @@ class _SplashIntroState extends State<SplashIntro> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-      child: FlutterLogo(
-        size: 200,
-      ),
-    ));
+          child: FlutterLogo(size: 200,),
+        )
+    );
   }
 }

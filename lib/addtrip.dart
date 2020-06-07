@@ -4,12 +4,15 @@ class Addtrip extends StatelessWidget {
   static const String _title = 'Trip Information';
   final Function selectHandler;
   Addtrip(this.selectHandler);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
       home: Scaffold(
-        appBar: AppBar(title: const Text(_title)),
+        appBar: AppBar(title: const Text(_title,style: TextStyle(fontFamily: 'Comic Sans', color: Colors.black), ),
+            centerTitle:true,
+            backgroundColor: Colors.green[500]),
         body: MyStatefulWidget(selectHandler),
       ),
     );
