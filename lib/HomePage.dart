@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ListTile(
                   //leading: Icon(Icons.radio_button_unchecked),
                   title: Text(trips[i]),
-                  subtitle: Text('Count'),
+                  subtitle: Text('count'),
                   trailing: Icon(Icons.more_vert),
             ))
         ],

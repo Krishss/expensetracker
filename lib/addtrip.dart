@@ -10,7 +10,7 @@ class Addtrip extends StatelessWidget {
     return MaterialApp(
       title: _title,
       home: Scaffold(
-        appBar: AppBar(title: const Text(_title,style: TextStyle(fontFamily: 'Comic Sans', color: Colors.black), ),
+        appBar: AppBar(title: const Text(_title,style: TextStyle(fontFamily: 'Georgia', color: Colors.black), ),
             centerTitle:true,
             backgroundColor: Colors.green[500]),
         body: MyStatefulWidget(selectHandler),
@@ -49,7 +49,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               if (value.isEmpty) {
                 return 'Please enter some text';
               }
-              
+
               return null;
             },
             onChanged: (String value){
@@ -58,24 +58,31 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               });
                 //_name=value;
                // print(_name);
-              
+
             },
           ),
+
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            padding: const EdgeInsets.symmetric(vertical: 100.0),
             child: RaisedButton(
-              onPressed: () 
+              splashColor: Colors.greenAccent,
+              color: Colors.lime[200],
+              onPressed: ()
               {
                 // Validate will return true if the form is valid, or false if
                 // the form is invalid.
                 if (_formKey.currentState.validate()) {
-                  
+
                   this.selectHandler(_name);
                 }
               },
               child: Text('Submit'),
             ),
           ),
+
+
+
+
         ],
       ),
     );
